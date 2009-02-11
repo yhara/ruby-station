@@ -2,3 +2,5 @@
 
 # Here go your requires for models:
 # require 'model/user'
+
+require 'model/application'
