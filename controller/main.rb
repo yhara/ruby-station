@@ -6,6 +6,9 @@
 # this will force the controller to be mounted on: /otherurl
 
 class MainController < Controller
+  layout('default'){|path, wish|
+    path !~ /do_add/
+  }
 
   def index
     # TEMP: shutdown all apps
@@ -16,8 +19,7 @@ class MainController < Controller
 #    }
     #Application.clear
 
-    @applications = Application.original
-    # index.mab
+    @applications = Application.all
   end
 
   def add
@@ -44,11 +46,10 @@ class MainController < Controller
       :pid => nil
     }
   end
-  deny_layout :do_add
 
   def start(id)
     id = id.to_i
-    app = Application.original[id]
+    app = Application.get(id)
     raise "id #{id} not found" unless app
 
     start_cmd = "ruby1.9 #{gem_home}/#{File.basename(app[:name], ".gem")}/start.rb -p #{app[:port]}"

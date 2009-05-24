@@ -2,9 +2,9 @@
 # controllers
 
 class Controller < Ramaze::Controller
-  layout '/page'
+  map '/page'
   helper :xhtml
-  engine :Ezamar
+  engine :Etanni
 end
 
 # Here go your requires for subclasses of Controller:
