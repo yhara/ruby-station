@@ -1,24 +1,9 @@
-# Default url mappings are:
-#  a controller called Main is mapped on the root of the site: /
-#  a controller called Something is mapped on: /something
-# If you want to override this, add a line like this inside the class
-#  map '/otherurl'
-# this will force the controller to be mounted on: /otherurl
-
 class MainController < Controller
   layout('default'){|path, wish|
     path !~ /do_add/
   }
 
   def index
-    # TEMP: shutdown all apps
-#    Application.keys.each{|k| 
-#      app = Application[k]
-#      app[:pid] = nil
-#      Application[k] = app
-#    }
-    #Application.clear
-
     @applications = Application.all
   end
 
