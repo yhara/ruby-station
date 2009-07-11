@@ -1,4 +1,6 @@
 class Applications < Controller
+  map '/applications'
+
   layout{|path, ext|
     "default" if path != "do_install"
   }
@@ -49,6 +51,25 @@ class Applications < Controller
   end
 
   def uninstall(name)
+  end
+
+  def start(id)
+    app = Application.get(id)
+    raise "application not found(id=#{id})" unless app
+
+    app.start
+    sleep 1
+
+    redirect "http://localhost:#{app.port}/"
+  end
+
+  def stop(id)
+    app = Application.get(id)
+    raise "application not found(id=#{id})" unless app
+
+    app.stop
+
+    redirect_referer
   end
 
 end
