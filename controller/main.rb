@@ -7,31 +7,6 @@ class MainController < Controller
     @applications = Application.all
   end
 
-  def add
-    tempfile = request["gem"][:tempfile]
-    @filename = request["gem"][:filename]
-    @size = tempfile.size
-    session[:tempfile] = tempfile
-    session[:filename] = @filename
-  end
-
-  def do_add
-    filename = session[:filename]
-    newpath = "/tmp/a.gem"
-    File.symlink(session[:tempfile].path, newpath)
-    @result = h `gem1.9 install #{newpath}`
-    File.unlink(newpath)
-
-    Application.clear
-    id = Application.size
-    Application[id] = {
-      :id => id,
-      :name => filename,
-      :port => 30000 + rand(9999),
-      :pid => nil
-    }
-  end
-
   def start(id)
     id = id.to_i
     app = Application.get(id)
