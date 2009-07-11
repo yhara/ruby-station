@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rubygems'
 require 'ramaze'
 
@@ -6,7 +7,8 @@ require 'ramaze'
 $LOAD_PATH.unshift(__DIR__)
 
 # Initialize controllers and models
+require 'config.rb'
 require 'controller/init'
 require 'model/init'
 
-Ramaze.start :adapter => :webrick, :port => 7000
+Ramaze.start :adapter => :thin, :port => 7000
