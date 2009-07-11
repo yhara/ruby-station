@@ -19,7 +19,7 @@
           <td>
             #{h app.port}
           </td>
-          <td>起動 / <a href='/stop/#{u app.id}'>停止</a></td>
+          <td>起動 / #{Applications.a("停止", :stop, app.id)}</td>
         <?r else ?>
           <td>
             #{h app.name}
@@ -27,7 +27,7 @@
           <td>
             #{h app.port}
           </td>
-          <td><a href='/start/#{u app.id}' target='_blank' onclick='setTimeout(function(){window.location = window.location;}, 1000)'>
+          <td><a href='#{Applications.r(:start, app.id)}' target='_blank' onclick='setTimeout(function(){window.location = window.location;}, 1000)'>
           起動</a> / 停止</td>
         <?r end ?>
       </tr>
