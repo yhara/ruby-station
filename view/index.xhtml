@@ -7,7 +7,7 @@
     <table>
       <tr>
         <th>名前</th>
-        <th>ポート</th>
+        <th>バージョン</th>
         <th colspan="2">状態</th>
       </tr>
       <?r @applications.each do |app| ?>
@@ -17,7 +17,7 @@
             <a href='http://localhost:#{h app.port}' target='_blank'>#{h app.name}</a>
           </td>
           <td>
-            #{h app.port}
+            #{h app.version}
           </td>
           <td>起動 / #{Applications.a("停止", :stop, app.id)}</td>
         <?r else ?>
@@ -25,7 +25,7 @@
             #{h app.name}
           </td>
           <td>
-            #{h app.port}
+            #{h app.version}
           </td>
           <td><a href='#{Applications.r(:start, app.id)}' target='_blank' onclick='setTimeout(function(){window.location = window.location;}, 1000)'>
           起動</a> / 停止</td>
