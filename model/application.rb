@@ -1,5 +1,8 @@
+require 'ramaze/tool/bin'
+
 class Application
   include DataMapper::Resource
+  include Ramaze::Tool::Bin::Helpers
 
   property :id, Serial
   property :pid, Integer
@@ -25,7 +28,16 @@ class Application
 
   def stop
     return unless self.pid
-    raise NotImplementedError
+
+    Process.kill("INT", self.pid)
+    if is_running?(self.pid)
+      sleep 2
+      Ramaze::Log.warn "Process #{self.pid} did not die, forcing it with -9"
+      Process.kill(9, self.pid)
+    end
+
+    self.pid = nil
+    self.save
   end
 
   private
