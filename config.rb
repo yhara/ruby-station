@@ -23,13 +23,8 @@ class Conf
   FileUtils.makedirs(@yaml[:gem_bin_dir])
   FileUtils.makedirs(@yaml[:data_dir])
 
-  def self.installed?(fullname)
-    File.exist?(File.join(self.gem_dir, fullname))
+  unless GemManager.installed?("ruby-station", RubyStation::VERSION)
+    gem_path = __DIR__("pkg/ruby-station-#{RubyStation::VERSION}.gem")
+    GemManager.install_file(gem_path)
   end
-
-  def self.install_appkit
-    GemManager.install_file(__DIR__("pkg/ruby-station-#{RubyStation::VERSION}.gem"))
-  end
-
-  install_appkit unless installed?("ruby-station-#{RubyStation::VERSION}")
 end

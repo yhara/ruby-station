@@ -1,4 +1,8 @@
 module GemManager
+  def self.installed?(gemname, version)
+    File.exist?(File.join(Conf.gem_dir, "#{gemname}-#{version}"))
+  end
+
   def self.install_file(path)
     begin
       # make symlink
