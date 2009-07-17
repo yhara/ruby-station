@@ -19,27 +19,15 @@ class Applications < Controller
   def do_install(name=nil)
     if name.nil?
       path = session[:tempfile].path
-      newpath = "/tmp/a.gem"
-      begin
-        File.symlink(session[:tempfile].path, newpath)
-        cmd = [
-          Conf.gem_command, "install", newpath,
-          "-i", Conf.gem_dir,
-          "-n", Conf.gem_bin_dir,
-          Conf.gem_install_option
-        ].join(" ")
-        Ramaze::Log.info cmd
-        @result = h `#{cmd}`
-        spec = YAML.load(`gem spec #{path}`)
-      ensure
-        File.unlink(newpath)
-      end
+      result, name, version = GemManager.install_file(path)
+
+      @result = h result
 
       Application.create({
         :pid => nil,
         :port => 30000 + rand(9999),
-        :name => spec.name,
-        :version => spec.version.to_s,
+        :name => name,
+        :version => version.to_s,
       })
     end
   end
