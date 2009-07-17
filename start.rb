@@ -7,6 +7,7 @@ require 'ramaze'
 $LOAD_PATH.unshift(__DIR__)
 
 # Initialize controllers and models
+require 'util/gem-manager.rb'
 require 'config.rb'
 require 'controller/init'
 require 'model/init'
