@@ -20,15 +20,18 @@ class Applications < Controller
     if name.nil?
       path = session[:tempfile].path
       result, name, version = GemManager.install_file(path)
+      ver = version.to_s
 
       @result = h result
 
-      Application.create({
-        :pid => nil,
-        :port => 30000 + rand(9999),
-        :name => name,
-        :version => version.to_s,
-      })
+      unless Application.find(:name => name, :version => ver)
+        Application.create({
+          :pid => nil,
+          :port => 30000 + rand(9999),
+          :name => name,
+          :version => ver,
+        })
+      end
     end
   end
 
