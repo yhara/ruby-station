@@ -1,7 +1,11 @@
 <div id="install">
-  <h2>アプリケーションの追加</h2>
+  <h2>Installing application</h2>
 
-  <p>Gem「#{@filename}」をインストールしています... (#{@size} bytes)</p>
+  <?r if @name ?>
+    <p>Installing gem '#{@name}'...</p>
+  <?r else ?>
+    <p>Installing gem '#{@filename}'... (#{@size} bytes)</p>
+  <?r end ?>
 
   <pre id="result">
     <img src='/spinner.gif'>

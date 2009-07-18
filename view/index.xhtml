@@ -1,15 +1,15 @@
 
 <div id="list">
-  <h2>アプリケーション一覧</h2>
+  <h2>Listing Applications</h2>
   <?r if @applications.nil? or @applications.empty? ?>
       
   <?r else ?>
     <table>
       <tr>
-        <th>名前</th>
-        <th>バージョン</th>
-        <th>状態</th>
-        <th>操作</th>
+        <th>Name</th>
+        <th>Version</th>
+        <th>State</th>
+        <th>Operation</th>
       </tr>
       <?r @applications.each do |app| ?>
       <tr>
@@ -44,13 +44,36 @@
   <?r end ?>
 </div>
 <div id="new">
-  <h2>アプリケーションの追加</h2>
+  <h2>Installing Applications</h2>
+  <input type="radio" id="by_name_button" checked>
+  <label for="by_name_button">by name</label>
+  <input type="radio" id="by_file_button">
+  <label for="by_file_button">by file</label>
 
-  <form action="#{Applications.r(:install)}" method="POST" enctype="multipart/form-data">
-    <input type="file" name="gem">
-    <input type="submit" value="送信">
-  </form>
+  <div id="by_name">
+    <form action="#{Applications.r(:install)}" method="POST" enctype="multipart/form-data">
+      <input type="text" name="name" size="30">
+      <input type="submit" value="install">
+    </form>
+  </div>
+
+  <div id="by_file" style="display: none;">
+    <form action="#{Applications.r(:install)}" method="POST" enctype="multipart/form-data">
+      <input type="file" name="gem" size="50">
+      <input type="submit" value="install">
+    </form>
+  </div>
 </div>
 
-<div id="debug" style="display:block;">
-</div>
+<script type="text/javascript">
+$(function(){
+  $("#by_name_button").change(function(){
+    $("#by_name").show();
+    $("#by_file").hide();
+  });
+  $("#by_file_button").change(function(){
+    $("#by_name").hide();
+    $("#by_file").show();
+  });
+});
+</script>

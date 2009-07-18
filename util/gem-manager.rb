@@ -33,10 +33,35 @@ module GemManager
         Ramaze::Log.info "made data dir for the gem: #{data_dir}"
       end
 
-      [result, spec.name, spec.version]
+      [result, spec.name, spec.version.to_s]
     ensure
       File.unlink(newpath)
     end
+  end
+
+  def self.install_gem(name)
+    # install
+    cmd = [
+      Conf.gem_command, "install", name,
+      "-i", Conf.gem_dir,
+      "-n", Conf.gem_bin_dir,
+      Conf.gem_install_option
+    ].join(" ")
+    Ramaze::Log.info cmd
+    
+    # execute
+    result = `#{cmd}`
+
+    # make data dir
+    raise unless result =~ /installed #{name}-(.*)/
+    version = $1
+    data_dir = File.join(Conf.data_dir, "#{name}-#{version}")
+    unless File.directory?(data_dir)
+      Dir.mkdir(data_dir)
+      Ramaze::Log.info "made data dir for the gem: #{data_dir}"
+    end
+
+    [result, name, version]
   end
 
   def self.uninstall(name, version)

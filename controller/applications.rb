@@ -5,34 +5,36 @@ class Applications < Controller
     "default" unless path =~ /\Ado_/
   }
 
-  def install(name=nil)
-    if name.nil?
+  def install
+    if request["name"]
+      @name = request["name"]
+      session[:gemname] = @name
+    else
       tempfile = request["gem"][:tempfile]
       @filename = request["gem"][:filename]
       @size = tempfile.size
       session[:tempfile] = tempfile
-    else
-      raise
     end
   end
 
-  def do_install(name=nil)
-    if name.nil?
+  def do_install
+    if session[:gemname]
+
+    else
       path = session[:tempfile].path
       result, name, version = GemManager.install_file(path)
-      ver = version.to_s
 
-      @result = h result
-
-      unless Application.first(:name => name, :version => ver)
+      unless Application.first(:name => name, :version => version)
         Application.create({
           :pid => nil,
           :port => 30000 + rand(9999),
           :name => name,
-          :version => ver,
+          :version => version,
         })
       end
     end
+    session.clear
+    h result
   end
 
   def create
