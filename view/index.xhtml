@@ -8,7 +8,8 @@
       <tr>
         <th>名前</th>
         <th>バージョン</th>
-        <th colspan="2">状態</th>
+        <th>状態</th>
+        <th>操作</th>
       </tr>
       <?r @applications.each do |app| ?>
       <tr>
@@ -19,7 +20,9 @@
           <td>
             #{h app.version}
           </td>
-          <td>起動 / #{Applications.a("停止", :stop, app.id)}</td>
+          <td>
+            ON / #{Applications.a("OFF", :stop, app.id)}
+          </td>
         <?r else ?>
           <td>
             #{h app.name}
@@ -27,9 +30,14 @@
           <td>
             #{h app.version}
           </td>
-          <td><a href='#{Applications.r(:start, app.id)}' target='_blank' onclick='setTimeout(function(){window.location = window.location;}, 1000)'>
-          起動</a> / 停止</td>
+          <td>
+            <a href='#{Applications.r(:start, app.id)}' target='_blank' onclick='setTimeout(function(){window.location = window.location;}, 1000)'>
+              ON</a> / OFF
+          </td>
         <?r end ?>
+          <td>
+            #{Applications.a("uninstall", :uninstall, app.id)}
+          </td>
       </tr>
       <?r end ?>
     </table>
