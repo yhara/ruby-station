@@ -55,5 +55,10 @@ class Conf
       gem_path = __DIR__("pkg/ruby-station-#{RubyStation::VERSION}.gem")
       GemManager.install_file(gem_path)
     end
+#    unless `#{self.gem_command} sources`.include?("github")
+#      cmd = "#{self.gem_command} sources -a http://gems.github.com"
+#      Ramaze::Log.info cmd
+#      `#{cmd}`
+#    end
   end
 end
