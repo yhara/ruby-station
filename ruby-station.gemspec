@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.description = %q{Create, Distribute, and Install Ruby applications easily}
   s.email = %q{yutaka.hara/at/gmail.com}
   s.executables = ["ruby-station"]
+
   s.files = [
     "Rakefile",
      "VERSION",
