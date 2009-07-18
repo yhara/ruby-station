@@ -22,4 +22,7 @@ module RubyStation
 
   def self.port; @port; end
   def self.data_dir; @data_dir; end
+  def self.data_path(filename)
+    File.expand_path(filename, @data_dir)
+  end
 end
