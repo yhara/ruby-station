@@ -4,4 +4,4 @@
 :gem_bin_dir: "./gem_bin"
 :gem_install_option: "--no-rdoc --no-ri"
 :data_dir: "./data"
-:server_port: 
+:server_port: 2534
