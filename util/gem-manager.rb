@@ -28,8 +28,10 @@ module GemManager
       # make data dir
       spec = YAML.load(`gem spec #{path}`)
       data_dir = File.join(Conf.data_dir, "#{spec.name}-#{spec.version}")
-      Dir.mkdir(data_dir)
-      Ramaze::Log.info "made data dir for the gem: #{data_dir}"
+      unless File.directory?(data_dir)
+        Dir.mkdir(data_dir)
+        Ramaze::Log.info "made data dir for the gem: #{data_dir}"
+      end
 
       [result, spec.name, spec.version]
     ensure
