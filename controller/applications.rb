@@ -49,7 +49,7 @@ class Applications < Controller
     raise "application not found(id=#{id})" unless app
 
     app.start
-    sleep 1
+    sleep 3
 
     redirect "http://localhost:#{app.port}/"
   end
