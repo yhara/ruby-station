@@ -24,7 +24,7 @@ class Applications < Controller
 
       @result = h result
 
-      unless Application.find(:name => name, :version => ver)
+      unless Application.first(:name => name, :version => ver)
         Application.create({
           :pid => nil,
           :port => 30000 + rand(9999),
