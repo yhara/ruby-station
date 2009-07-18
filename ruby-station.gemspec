@@ -6,12 +6,15 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-07-18}
+  s.date = %q{2009-07-19}
+  s.default_executable = %q{ruby-station}
   s.description = %q{Create, Distribute, and Install Ruby applications easily}
   s.email = %q{yutaka.hara/at/gmail.com}
+  s.executables = ["ruby-station"]
   s.files = [
     "Rakefile",
      "VERSION",
+     "bin/ruby-station",
      "config.rb",
      "controller/applications.rb",
      "controller/init.rb",
@@ -27,9 +30,8 @@ Gem::Specification.new do |s|
      "public/ramaze.png",
      "public/spinner.gif",
      "ruby-station.gemspec",
+     "sample.config.yaml",
      "spec/main.rb",
-     "start.rb",
-     "start.ru",
      "util/gem-manager.rb",
      "view/applications/do_install.xhtml",
      "view/applications/install.xhtml",
