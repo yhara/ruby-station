@@ -38,4 +38,16 @@ module GemManager
       File.unlink(newpath)
     end
   end
+
+  def self.uninstall(name, version)
+    cmd = [
+      Conf.gem_command, "uninstall", name,
+      "-v", version,
+      "-i", Conf.gem_dir,
+      "-n", Conf.gem_bin_dir
+    ].join(" ")
+    Ramaze::Log.info cmd
+
+    `#{cmd}`
+  end
 end
