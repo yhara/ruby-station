@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# coding: utf-8
+require 'optparse'
+require 'rubygems'
+require 'ramaze'
+
+$LOAD_PATH.unshift __DIR__("../")
+
+require 'util/gem-manager.rb'
+require 'config.rb'
+Conf.parse_opt
+Conf.init
+
+require 'controller/init'
+require 'model/init'
+
+Ramaze.start :port => Conf.server_port, :root => __DIR__("../")
