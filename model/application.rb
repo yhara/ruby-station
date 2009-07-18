@@ -56,3 +56,5 @@ class Application
   end
 end
 DataMapper.auto_upgrade!
+
+Application.all.each{|a| a.update_attributes(:pid => nil)}
