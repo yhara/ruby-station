@@ -1,12 +1,16 @@
 module GemManager
   def self.installed?(gemname, version)
-    File.exist?(File.join(Conf.gem_dir, "#{gemname}-#{version}"))
+    gem_path = File.join(Conf.gem_dir, "gems", "#{gemname}-#{version}")
+    exists = File.exist?(gem_path)
+    Ramaze::Log.info "checking existance of #{gem_path}.. #{exists}"
+    
+    exists
   end
 
   def self.install_file(path)
     begin
       # make symlink
-      newpath = "/tmp/a.gem"
+      newpath = "/tmp/#{File.basename(path, ".gem")}.gem"
       File.symlink(path, newpath)
 
       # install
@@ -18,8 +22,15 @@ module GemManager
       ].join(" ")
       Ramaze::Log.info cmd
 
+      # execute
       result = `#{cmd}`
+
+      # make data dir
       spec = YAML.load(`gem spec #{path}`)
+      data_dir = File.join(Conf.data_dir, "#{spec.name}-#{spec.version}")
+      Dir.mkdir(data_dir)
+      Ramaze::Log.info "made data dir for the gem: #{data_dir}"
+
       [result, spec.name, spec.version]
     ensure
       File.unlink(newpath)
