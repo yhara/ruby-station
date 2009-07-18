@@ -40,6 +40,10 @@ class Application
     self.save
   end
 
+  def full_name
+    "#{self.name}-#{self.version}"
+  end
+
   private
 
   def script_path
@@ -49,10 +53,6 @@ class Application
 
   def data_dir
     File.join(Conf.data_dir, full_name)
-  end
-
-  def full_name
-    "#{self.name}-#{self.version}"
   end
 end
 DataMapper.auto_upgrade!
