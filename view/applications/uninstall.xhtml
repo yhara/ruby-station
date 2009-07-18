@@ -1,0 +1,17 @@
+<div id="uninstall">
+  <h2>アプリケーションの削除</h2>
+
+  <p>uninstalling #{@app.full_name} ..</p>
+
+  <pre id="result">
+    <img src='/spinner.gif'>
+  </pre>
+
+  <a href='/'>back</a>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#result").load("#{r(:do_uninstall, @app.id)}");
+  });
+</script>

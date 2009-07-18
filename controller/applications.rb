@@ -2,7 +2,7 @@ class Applications < Controller
   map '/applications'
 
   layout{|path, ext|
-    "default" if path != "do_install"
+    "default" unless path =~ /\Ado_/
   }
 
   def install(name=nil)
@@ -41,7 +41,20 @@ class Applications < Controller
   def show(name)
   end
 
-  def uninstall(name)
+  def uninstall(id)
+    app = Application.get(id)
+    raise "application not found(id=#{id})" unless app
+
+    @app = app
+  end
+
+  def do_uninstall(id)
+    app = Application.get(id)
+    raise "application not found(id=#{id})" unless app
+
+    result = GemManager.uninstall(app.name, app.version)
+    app.destroy
+    result
   end
 
   def start(id)
