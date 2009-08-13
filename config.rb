@@ -9,9 +9,13 @@ end
 
 class Conf
   %w(ruby_command gem_command gem_dir gem_bin_dir gem_install_option data_dir server_port).each do |m|
-    module_eval <<-EOD
+    class_eval <<-EOD
       def self.#{m}; @yaml[:#{m}]; end
     EOD
+  end
+
+  def self.db_path
+    File.join(@home, "ruby-station.db")
   end
 
   def self.parse_opt
@@ -19,7 +23,7 @@ class Conf
 
     @opt = OptionParser.new{|o|
       o.on("--home PATH", "path to save ruby-station data (default: #@home)"){|path|
-        @home = path
+        @home = File.expand_path(path)
       }
       o.on("-h", "--help", "show this message"){
         puts @opt.to_s
