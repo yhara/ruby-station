@@ -1,0 +1,27 @@
+require 'rake/gempackagetask'
+
+version = File.read('VERSION').chomp
+
+spec = Gem::Specification.new do |s|
+  s.name             = 'ruby-station-runtime'
+  s.version          = version
+  s.has_rdoc         = false
+#  s.extra_rdoc_files = %w(README.rdoc)
+#  s.rdoc_options     = %w(--main README.rdoc)
+  s.summary          = "Runtime library for RubyStation"
+  s.author           = 'Yutaka HARA'
+  s.email            = 'yutaka.hara/at/gmail.com'
+#  s.homepage         = 'http://my-site.net'
+  s.files            = %w(Rakefile) + Dir.glob("{lib}/**/*")
+end
+
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.gem_spec = spec
+end
+
+desc 'Generate the gemspec'
+task :gemspec do
+  file = File.dirname(__FILE__) + "/#{spec.name}.gemspec"
+  File.open(file, 'w') {|f| f << spec.to_ruby }
+  puts "Created gemspec: #{file}"
+end

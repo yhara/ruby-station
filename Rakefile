@@ -41,3 +41,14 @@ desc "check for gem to be built"
 task :stalk do
   sh "gemstalk yhara #{PROJECT_NAME}"
 end
+
+# for runtime
+
+runtime_version = File.read("runtime/VERSION").chomp
+
+desc "Create runtime gem"
+task :runtime do
+  cd "runtime/"
+  sh "rake gemspec"
+  sh "gem build ruby-station-runtime.gemspec"
+end
