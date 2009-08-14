@@ -4,7 +4,8 @@ require 'fileutils'
 #Encoding.default_external = 'UTF-8'
 
 module RubyStation
-  VERSION = File.read(File.expand_path("./VERSION", File.dirname(__FILE__))).chomp
+  VERSION = File.read(__DIR__("VERSION")).chomp
+  RUNTIME_VERSION = File.read(__DIR__("runtime", "VERSION")).chomp
 end
 
 class Conf
@@ -55,8 +56,9 @@ class Conf
     FileUtils.makedirs(@yaml[:gem_bin_dir])
     FileUtils.makedirs(@yaml[:data_dir])
 
-    unless GemManager.installed?("ruby-station", RubyStation::VERSION)
-      gem_path = __DIR__("pkg/ruby-station-#{RubyStation::VERSION}.gem")
+    runtime_ver = RubyStation::RUNTIME_VERSION
+    unless GemManager.installed?("ruby-station", runtime_ver)
+      gem_path = __DIR__("runtime/ruby-station-runtime-#{runtime_ver}.gem")
       GemManager.install_file(gem_path)
     end
 #    unless `#{self.gem_command} sources`.include?("github")
