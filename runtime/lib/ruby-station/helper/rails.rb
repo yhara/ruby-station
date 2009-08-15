@@ -22,20 +22,22 @@ module RubyStation
       #
       # @api external
       def self.run
-        install
+        caller_path = caller[0][/^(.*):/, 1]
+        self.install(File.dirname(caller_path))
+
         Dir.chdir(RubyStation.data_dir)
-        start_server
+        self.start_server
       end
 
       # Ensure your app is copied to data_dir.
       # It does nothing if already copied.
       #
       # @api internal
-      def self.install
+      def self.install(app_dir)
         return if installed?
 
         # Note: "." is needed, otherwise copied as data_dir/appname/*
-        from = File.join(File.dirname(__FILE__), ".")
+        from = File.join(app_dir, ".")
         to = RubyStation.data_dir
         FileUtils.cp_r(from, to)
       end
@@ -44,6 +46,7 @@ module RubyStation
       #
       # @api internal
       def self.installed?
+        # Note: Too simple?
         File.exist?(File.join(RubyStation.data_dir, "main.rb"))
       end
 
