@@ -14,4 +14,6 @@ Conf.init
 require 'controller/init'
 require 'model/init'
 
-Ramaze.start :port => Conf.server_port, :root => __DIR__("../")
+Ramaze.start :port => Conf.server_port,
+             :root => __DIR__("../"),
+             :mode => :live
