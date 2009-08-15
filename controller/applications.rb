@@ -18,21 +18,24 @@ class Applications < Controller
   end
 
   def do_install
-    if session[:gemname]
-
-    else
+    if gemname = session[:gemname]
+      result, name, version = GemManager.install_gem(gemname)
+    elsif session[:tempfile]
       path = session[:tempfile].path
       result, name, version = GemManager.install_file(path)
-
-      unless Application.first(:name => name, :version => version)
-        Application.create({
-          :pid => nil,
-          :port => 30000 + rand(9999),
-          :name => name,
-          :version => version,
-        })
-      end
+    else
+      raise
     end
+
+    unless Application.first(:name => name, :version => version)
+      Application.create({
+        :pid => nil,
+        :port => 30000 + rand(9999),
+        :name => name,
+        :version => version,
+      })
+    end
+
     session.clear
     h result
   end
