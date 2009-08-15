@@ -25,4 +25,6 @@ module RubyStation
   def self.data_path(filename)
     File.expand_path(filename, @data_dir)
   end
+
+  autoload :Helper, "ruby-station/helper"
 end
