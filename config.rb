@@ -57,7 +57,7 @@ class Conf
     FileUtils.makedirs(@yaml[:data_dir])
 
     runtime_ver = RubyStation::RUNTIME_VERSION
-    unless GemManager.installed?("ruby-station", runtime_ver)
+    unless GemManager.installed?("ruby-station-runtime", runtime_ver)
       gem_path = __DIR__("runtime/ruby-station-runtime-#{runtime_ver}.gem")
       GemManager.install_file(gem_path)
     end
