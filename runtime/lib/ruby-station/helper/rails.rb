@@ -12,17 +12,25 @@ module RubyStation
     # before you create the gem of your app.
     #
     # @example
-    #   RubyStation::Helper::Rails.install
-    #   RubyStation::Helper::Rails.start_server
+    #   RubyStation::Helper::Rails.run
     #
     # @api external
 
     module Rails
 
+      # Copy files (if needed) and start Rails server.
+      #
+      # @api external
+      def self.run
+        install
+        Dir.chdir(RubyStation.data_dir)
+        start_server
+      end
+
       # Ensure your app is copied to data_dir.
       # It does nothing if already copied.
       #
-      # @api external
+      # @api internal
       def self.install
         return if installed?
 
@@ -41,7 +49,7 @@ module RubyStation
 
       # Start Rails with 'script/server'.
       #
-      # @api external
+      # @api internal
       def self.start_server
         Dir.chdir(RubyStation.data_dir)
         # TODO: Support Windows
