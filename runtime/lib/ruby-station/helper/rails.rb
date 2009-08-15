@@ -34,20 +34,21 @@ module RubyStation
       #
       # @api internal
       def self.install(app_dir)
-        return if installed?
-
         # Note: "." is needed, otherwise copied as data_dir/appname/*
         from = File.join(app_dir, ".")
         to = RubyStation.data_dir
-        FileUtils.cp_r(from, to)
+
+        unless installed?(from, to)
+          FileUtils.cp_r(from, to)
+        end
       end
 
       # Checks if the files are copied
       #
       # @api internal
-      def self.installed?
+      def self.installed?(from, to)
         # Note: Too simple?
-        File.exist?(File.join(RubyStation.data_dir, "main.rb"))
+        File.exist?(File.join(to, "main.rb"))
       end
 
       # Start Rails with 'script/server'.
