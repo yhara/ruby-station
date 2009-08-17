@@ -11,6 +11,7 @@ require 'config.rb'
 Conf.parse_opt
 Conf.init
 
+require 'util/servant.rb'
 require 'controller/init'
 require 'model/init'
 

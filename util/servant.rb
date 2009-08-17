@@ -1,18 +1,20 @@
 require 'open3'
+require 'ramaze/tool/bin'
 
 # class Servant provides process invocations.
 #
 # @example
-#   s = Servant.watch("some-app -p 12345"){
+#   pid = Servant.watch("some-app -p 12345"){
 #     # this block is called when app finishes
 #   }
-#   s.pid  #=> returns the process-id
-#   s.kill #=> stop the app immediately
+#
+#   Servant.kill(pid) #=> stop the app immediately
 #
 #   Servant.communicate("gem install foobar"){|line|
 #     # each line is yielded form process
 #   }
 class Servant
+  extend Ramaze::Tool::Bin::Helpers # provides is_running?
 
   def self.watch(cmd, args=[], &block)
     begin
@@ -25,8 +27,7 @@ class Servant
       Process.waitpid(pid)
       block.call
     }
-
-    return new(pid)
+    return pid
   end
 
   def self.communicate(cmd, args=[])
@@ -42,18 +43,14 @@ class Servant
     }
   end
 
-  def initialize(pid)
-    @pid = pid
-  end
+  def self.kill(pid)
+    Process.kill("INT", pid)
 
-  def kill
-    Process.kill("INT", @pid)
-
-#    if is_running?(self.pid)
-#      sleep 2
-#      Ramaze::Log.warn "Process #{self.pid} did not die, forcing it with -9"
-#      Process.kill(9, self.pid)
-#    end
+    if is_running?(pid)
+      sleep 2
+      Ramaze::Log.warn "Process #{pid} did not die, forcing it with -9"
+      Process.kill(9, pid)
+    end
   end
 
 end
