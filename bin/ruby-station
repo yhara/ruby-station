@@ -15,6 +15,9 @@ require 'util/servant.rb'
 require 'controller/init'
 require 'model/init'
 
+if Conf.debug
+  Ramaze::Log.info "Starting Ramaze with dev mode"
+end
 Ramaze.start :port => Conf.server_port,
              :root => __DIR__("../"),
-             :mode => :live
+             :mode => (Conf.debug ? :dev : :live)

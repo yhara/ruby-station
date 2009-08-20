@@ -9,7 +9,7 @@ module RubyStation
 end
 
 class Conf
-  %w(ruby_command gem_command gem_dir gem_bin_dir gem_install_option data_dir server_port).each do |m|
+  %w(ruby_command gem_command gem_dir gem_bin_dir gem_install_option data_dir server_port debug).each do |m|
     class_eval <<-EOD
       def self.#{m}; @yaml[:#{m}]; end
     EOD
