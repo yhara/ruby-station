@@ -1,0 +1,19 @@
+<h3>foo</h3>
+<div id="result">
+  waiting..
+</div>
+<script>
+  $(function(){
+    $.get("#{r :_foo_gen}");
+    var loop = function(){
+      $.getJSON("#{r '_foo_get.json'}", function(result){
+        console.debug(result[0], result[1]);
+        $("#result").append(result[1]);
+        if (!result[0]) {
+          setTimeout(loop, 2000);
+        }
+      });
+    };
+    loop();
+  });
+</script>
