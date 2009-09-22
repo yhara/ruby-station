@@ -5,6 +5,7 @@ class Applications < Controller
   provide :json, :type => "application/json" do |action, value|
     value.to_json
   end
+  helper :flash
 
   layout{|path, ext|
     "default" unless path =~ /\A_/
@@ -72,19 +73,22 @@ class Applications < Controller
   end
 
   def uninstall(id)
-    app = Application.get(id)
-    raise "application not found(id=#{id})" unless app
-
-    @app = app
+    if app = Application.get(id)
+      @app = app
+    else
+      flash[:error] = "The application (id=#{id}) is already uninstalled."
+      redirect r(:notfound)
+    end
   end
 
   def _uninstall(id)
-    app = Application.get(id)
-    raise "application not found(id=#{id})" unless app
-
-    result = GemManager.uninstall(app.name, app.version)
-    app.destroy
-    result
+    if app = Application.get(id)
+      result = GemManager.uninstall(app.name, app.version)
+      app.destroy
+      result
+    else
+      ""
+    end
   end
 
   def start(id)
