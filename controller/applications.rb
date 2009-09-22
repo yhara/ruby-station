@@ -78,7 +78,7 @@ class Applications < Controller
     @app = app
   end
 
-  def do_uninstall(id)
+  def _uninstall(id)
     app = Application.get(id)
     raise "application not found(id=#{id})" unless app
 
