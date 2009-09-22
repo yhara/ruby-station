@@ -47,7 +47,8 @@ class Conf
   end
 
   # TODO: refactor X-(
-  def self.init
+  def self.init(home=nil)
+    @home = home if home
     @yaml = self.load_yaml
     @yaml[:gem_dir] = File.expand_path(@yaml[:gem_dir], @home)
     @yaml[:gem_bin_dir] = File.expand_path(@yaml[:gem_bin_dir], @home)
@@ -56,15 +57,26 @@ class Conf
     FileUtils.makedirs(@yaml[:gem_bin_dir])
     FileUtils.makedirs(@yaml[:data_dir])
 
-    runtime_ver = RubyStation::RUNTIME_VERSION
-    unless GemManager.installed?("ruby-station-runtime", runtime_ver)
-      gem_path = __DIR__("runtime/ruby-station-runtime-#{runtime_ver}.gem")
-      GemManager.install_file(gem_path)
-    end
+    Runtime.install unless Runtime.installed?
+
 #    unless `#{self.gem_command} sources`.include?("github")
 #      cmd = "#{self.gem_command} sources -a http://gems.github.com"
 #      Ramaze::Log.info cmd
 #      `#{cmd}`
 #    end
+  end
+
+  module Runtime
+    VERSION = RubyStation::RUNTIME_VERSION
+
+    def self.installed?
+      GemManager.installed?("ruby-station-runtime", VERSION)
+    end
+    
+    def self.install
+      path = __DIR__("runtime/ruby-station-runtime-#{VERSION}.gem")
+      GemManager.new.install(path)
+    end
+
   end
 end

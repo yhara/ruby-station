@@ -13,9 +13,10 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.homepage = "http://github.com/yhara/#{PROJECT_NAME}"
   gemspec.description = gemspec.summary
   gemspec.authors = ["Yutaka HARA"]
-#  gemspec.add_dependency('ramaze', '= 2009.06.12')
-#  gemspec.add_dependency('dm-core')
-#  gemspec.add_dependency('do_sqlite3')
+  gemspec.add_dependency('ramaze', '= 2009.07')
+  gemspec.add_dependency('dm-core')
+  gemspec.add_dependency('do_sqlite3')
+  gemspec.add_development_dependency('rspec', '= 1.2.8')
 end
 
 desc "install current source as gem"
