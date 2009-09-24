@@ -5,7 +5,6 @@ class Applications < Controller
   provide :json, :type => "application/json" do |action, value|
     value.to_json
   end
-  helper :flash
 
   layout{|path, ext|
     "default" unless path =~ /\A_/
@@ -77,7 +76,7 @@ class Applications < Controller
       @app = app
     else
       flash[:error] = "The application (id=#{id}) is already uninstalled."
-      redirect r(:notfound)
+      redirect MainController.r(:notfound)
     end
   end
 
