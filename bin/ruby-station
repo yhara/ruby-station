@@ -6,7 +6,7 @@ require 'ramaze'
 
 $LOAD_PATH.unshift __DIR__("../")
 
-require 'util/gem-manager.rb'
+require 'util/gem_manager.rb'
 require 'config.rb'
 Conf.parse_opt
 Conf.init
