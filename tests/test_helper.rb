@@ -2,7 +2,7 @@ require 'fileutils'
 require 'ramaze'
 Ramaze.options.started = true
 
-TESTS_DIR = __DIR__("../")
+TESTS_DIR = __DIR__
 def TESTS_DIR./(*paths)
   File.expand_path(File.join(*paths), TESTS_DIR)
 end
