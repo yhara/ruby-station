@@ -14,7 +14,7 @@ def clear_tmp(tmp_dir)
     if STDIN.gets.chomp == "y"
       FileUtils.rm_r(tmp_dir)
     else
-      raise "user chose not to clear TEST_TMP_DIR"
+      raise "user chose not to clear the temporary directory"
     end
   else
     Dir.mkdir(tmp_dir)
