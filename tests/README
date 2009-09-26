@@ -1,0 +1,17 @@
+Unit tests for RubyStation
+==========================
+
+spec
+----
+
+    $ gem intall rspec
+
+rspec spec/*
+
+features
+--------
+
+cucumber
+
+
+
