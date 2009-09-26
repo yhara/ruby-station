@@ -1,0 +1,7 @@
+:ruby_command: "ruby"
+:gem_command: "gem"
+:gem_dir: "../../tmp/gem_home"
+:gem_bin_dir: "../../tmp/gem_bin"
+:gem_install_option: "--no-rdoc --no-ri --verbose"
+:data_dir: "./data"
+:server_port: 2534

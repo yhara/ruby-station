@@ -35,6 +35,11 @@ class Conf
     @opt.parse!(ARGV)
   end
 
+  # for unit tests
+  def self.set_home(path)
+    @home = path
+  end
+
   def self.load_yaml
     yaml_path = File.join(@home, "config.yaml")
     unless File.exist?(yaml_path)
