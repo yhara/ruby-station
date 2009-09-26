@@ -1,3 +1,4 @@
+require __DIR__("./util/gem_manager")
 require 'yaml'
 require 'fileutils'
 
@@ -75,7 +76,7 @@ class Conf
     
     def self.install
       path = __DIR__("runtime/ruby-station-runtime-#{VERSION}.gem")
-      GemManager.new.install(path)
+      GemManager.install_file(path)
     end
 
   end
