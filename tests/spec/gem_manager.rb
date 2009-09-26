@@ -1,12 +1,11 @@
-require 'ramaze'
-require __DIR__("spec_helper.rb")
-require __DIR__("../../util/gem_manager.rb")
+require "#{File.dirname(__FILE__)}/spec_helper.rb"
+require TESTS_DIR/"../util/gem_manager.rb"
 
 # helpers
 
 describe GemManager do
   it "should install a gem via file" do
-    path = __DIR__("../data/hello/pkg/hello-0.2.0.gem")
+    path = TESTS_DIR/"data/hello/pkg/hello-0.2.0.gem"
     result, name, version = GemManager.install_file(path)
 
     result.should be_instance_of(String)
