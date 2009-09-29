@@ -8,10 +8,22 @@ spec
 
 rspec spec/*
 
+
 features
 --------
 
-cucumber
+1. install cucumber:
+    $ gem install cucumber
+
+2. install jruby:
+    TODO
+
+JRuby must be executable by 'jruby'.
+
+3. install culerity:
+    $ gem install langalex-culerity --source http://gems.github.com
+
+
 
 
 

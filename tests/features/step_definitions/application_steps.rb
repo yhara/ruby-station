@@ -1,5 +1,5 @@
-Given /^I have '(.*) (.*)'$/ do
-  pending
+Given /^I have '(.*) (.*)'$/ do |name, version|
+  GemManager.installed?(name, version)
 end
 
 Given /^I do not have '(.*) (.*)'$/ do |name, version|
