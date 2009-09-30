@@ -53,7 +53,7 @@ module GemManager
     result = `#{cmd}`
 
     # make data dir
-    raise unless result =~ /installed #{name}-(.*)/
+    raise "installation failed" unless result =~ /installed #{name}-(.*)/
     version = $1
     data_dir = File.join(Conf.data_dir, "#{name}-#{version}")
     unless File.directory?(data_dir)
