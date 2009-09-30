@@ -77,7 +77,7 @@ When /I visit the (.+) page/ do |name|
 end
 
 When /I wait while the spinner is shown/ do
-  img = $browser.image(:src, '/spinner.gif')
+  img = $browser.image(:id, 'spinner')
   $browser.wait_while{
     img.visible?
   }
