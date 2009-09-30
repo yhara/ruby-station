@@ -17,7 +17,7 @@ Before do
   $browser = Culerity::RemoteBrowserProxy.new $server, {:browser => :firefox}
 
   # is needed to open pages
-  @host = 'http://localhost:7001'
+  @host = "http://localhost:#{Conf.server_port}"
 end
 
 at_exit do
