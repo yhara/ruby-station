@@ -45,35 +45,35 @@
 </div>
 <div id="new">
   <h2>Installing Applications</h2>
-  <input type="radio" id="by_name_button" checked>
-  <label for="by_name_button">by name</label>
-  <input type="radio" id="by_file_button">
-  <label for="by_file_button">by file</label>
+  <form action="#{Applications.r(:install)}" method="POST" enctype="multipart/form-data">
+    <input type="radio" name="by" value="name" id="by_name_button" checked>
+    <label for="by_name_button">by name</label>
+    <input type="radio" name="by" value="file" id="by_file_button">
+    <label for="by_file_button">by file</label>
 
-  <div id="by_name">
-    <form action="#{Applications.r(:install)}" method="POST" enctype="multipart/form-data">
+    <div id="by_name">
       <input type="text" name="name" size="30">
       <input type="submit" value="install">
-    </form>
-  </div>
+    </div>
 
-  <div id="by_file" style="display: none;">
-    <form action="#{Applications.r(:install)}" method="POST" enctype="multipart/form-data">
+    <div id="by_file" style="display: none;">
       <input type="file" name="gem" size="50">
       <input type="submit" value="install">
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
 
 <script type="text/javascript">
 $(function(){
-  $("#by_name_button").change(function(){
+  $("#by_name_button").click(function(){
     $("#by_name").show();
     $("#by_file").hide();
+    return true;
   });
-  $("#by_file_button").change(function(){
+  $("#by_file_button").click(function(){
     $("#by_name").hide();
     $("#by_file").show();
+    return true;
   });
 });
 </script>

@@ -11,29 +11,33 @@ class Applications < Controller
   }
 
   def install
-    if request["name"]
+    session[:source_type] = request["by"]
+
+    case session[:source_type]
+    when "name"
       @name = request["name"]
       session[:gemname] = @name
-    else
+      session[:messages] = []
+    when "file"
       tempfile = request["gem"][:tempfile]
       @filename = request["gem"][:filename]
       @size = tempfile.size
       session[:tempfile] = tempfile
+    else
+      raise "unknown install source type: #{session[:source_type]}"
     end
   end
 
   def _install
-    session[:messages] = []
-    if gemname = session[:gemname]
-      result, name, version = GemManager.install_gem(gemname){|line|
-        session[:messages] << line
-      }
-      session[:messages] << :__end__
-    elsif session[:tempfile]
+    case session[:source_type]
+    when "name"
+      gemname = session[:gemname]
+      result, name, version = GemManager.install_gem(gemname)
+    when "file"
       path = session[:tempfile].path
       result, name, version = GemManager.install_file(path)
     else
-      raise
+      raise "unknown install source type: #{session[:source_type]}"
     end
 
     if result and not Application.first(:name => name, :version => version)
@@ -47,28 +51,6 @@ class Applications < Controller
 
     session.clear
     h result
-  end
-
-  def _message
-    return "['error']" if session[:messages].nil?
-
-    sleep 1 while session[:messages].empty?
-
-    is_end = "false"
-    if session[:messages].last == :__end__
-      session[:messages].pop
-      is_end = "true"
-    end
-
-    mes = session[:messages].map{|line| "#{h line.chomp}<br>"}.join
-    session[:messages].clear
-    "[#{is_end}, \"#{mes}\"]"
-  end
-
-  def create
-  end
-
-  def show(name)
   end
 
   def uninstall(id)
@@ -108,33 +90,4 @@ class Applications < Controller
 
     redirect_referer
   end
-
-  def foo
-    session[:foo] = []
-  end
-
-  def _foo_gen
-    5.times do |i|
-      session[:foo].push "this is line #{i}"
-      sleep 1
-    end
-    session[:foo].push :__end__
-  end
-
-  def _foo_get
-    if session[:foo].empty?
-      [nil]
-    else
-      if session[:foo].last == :__end__
-        is_end = true
-        session[:foo].pop
-      else
-        is_end = false
-      end
-      mes = session[:foo].map{|line| (h line.chomp)+"<br>\n"}.join
-      session[:foo].clear
-      [is_end, mes]
-    end
-  end
-
 end
