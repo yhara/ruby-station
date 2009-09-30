@@ -76,6 +76,13 @@ When /I visit the (.+) page/ do |name|
   assert_successful_response
 end
 
+When /I wait while the spinner is shown/ do
+  img = $browser.image(:src, '/spinner.gif')
+  $browser.wait_while{
+    img.visible?
+  }
+end
+
 When /I wait for the AJAX call to finish/ do
   $browser.wait
 end

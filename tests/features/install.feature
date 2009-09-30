@@ -17,6 +17,6 @@ Feature: Install
     And I visit the index page
     And I fill in <the path of hello-0.2.0.gem> for 'name'
     When I press 'install'
-    And I wait for the AJAX call to finish
+    And I wait while the spinner is shown
     Then I should see 'Installing'
     And I should have 'hello 0.2.0'
