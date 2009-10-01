@@ -37,18 +37,12 @@ When /I follow '(.*)'/ do |link|
   assert_successful_response
 end
 
-When /I fill in '(.*)' for '(.*)'/ do |value, field|
-  $browser.text_field(:id, find_label(field).for).set(value)
+When /I fill in '(.*)' for '(.*)'/ do |value, name|
+  $browser.text_field(:name, name).set(value)
 end
 
-When /I fill in <(.*)> for '(.*)'/ do |value, name|
-  str = case value
-        when /the path of (.*)/
-        else
-          raise
-        end
-  #$browser.text_field(:id, find_label(field).for).set(str)
-  $browser.text_field(:name, name).set(str)
+When /I fill in the path of '(.*)' for '(.*)'/ do |file, name|
+  $browser.file_field(:name, name).set(TESTS_DIR/file)
 end
 
 When /I check '(.*)'/ do |field|
@@ -77,9 +71,8 @@ When /I visit the (.+) page/ do |name|
 end
 
 When /I wait while the spinner is shown/ do
-  img = $browser.image(:id, 'spinner')
-  $browser.wait_while{
-    img.visible?
+  $browser.wait_while(60 * 3){ # 3 minutes
+    $browser.image(:id, 'spinner').exist?
   }
 end
 
