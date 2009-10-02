@@ -19,5 +19,3 @@
 2009-07-19 version 0.0.2
 
   * initial version
-
-
