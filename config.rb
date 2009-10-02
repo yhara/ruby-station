@@ -27,6 +27,11 @@ class Conf
       o.on("--home PATH", "path to save ruby-station data (default: #@home)"){|path|
         @home = File.expand_path(path)
       }
+      o.on("-v", "--version", "show version"){
+        puts "RubyStation version #{RubyStation::VERSION}"
+        puts "(runtime version: #{RubyStation::RUNTIME_VERSION})"
+        exit
+      }
       o.on("-h", "--help", "show this message"){
         puts @opt.to_s
         exit
