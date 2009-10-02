@@ -1,0 +1,18 @@
+2009-08-15 version 0.1.0
+
+  * added tests
+
+2009-08-15 version 0.0.4
+
+  * new: installing runtime
+  * new: runtime supports rails
+
+2009-08-13 version 0.0.3
+
+  * new: installing gems by name
+
+2009-07-19 version 0.0.2
+
+  * new: uninstall apps
+
+2009-06-18 version 0.0.1
