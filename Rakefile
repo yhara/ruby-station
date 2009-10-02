@@ -16,8 +16,8 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.add_dependency('ramaze', '= 2009.07')
   gemspec.add_dependency('dm-core')
   gemspec.add_dependency('do_sqlite3')
-  gemspec.add_development_dependency('rspec', '=> 1.2.8')
-  gemspec.add_development_dependency('cucumber', '=> 0.3.101')
+  gemspec.add_development_dependency('rspec', '>= 1.2.8')
+  gemspec.add_development_dependency('cucumber', '>= 0.3.101')
   gemspec.executables = ["bin/ruby-station"]
 end
 
