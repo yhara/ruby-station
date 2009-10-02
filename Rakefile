@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.add_dependency('do_sqlite3')
   gemspec.add_development_dependency('rspec', '>= 1.2.8')
   gemspec.add_development_dependency('cucumber', '>= 0.3.101')
-  gemspec.executables = ["bin/ruby-station"]
+  gemspec.executables = ["ruby-station"]
 end
 
 desc "install current source as gem"
