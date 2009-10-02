@@ -1,3 +1,5 @@
+require 'open3'
+
 module GemManager
   def self.installed?(gemname, version)
     gem_path = File.join(Conf.gem_dir, "gems", "#{gemname}-#{version}")
@@ -23,7 +25,10 @@ module GemManager
       Ramaze::Log.info cmd
 
       # execute
-      result = `#{cmd}`
+      out, err = Open3.popen3(cmd){|i, o, e|
+        [o.read, e.read]
+      }
+      return err unless out =~ /installed #{name}-(.*)/
 
       # make data dir
       spec = YAML.load(`gem spec #{path}`)
@@ -33,7 +38,7 @@ module GemManager
         Ramaze::Log.info "made data dir for the gem: #{data_dir}"
       end
 
-      [result, spec.name, spec.version.to_s]
+      [out, spec.name, spec.version.to_s]
     ensure
       File.unlink(newpath)
     end
@@ -50,10 +55,12 @@ module GemManager
     Ramaze::Log.info cmd
     
     # execute
-    result = `#{cmd}`
+    out, err = Open3.popen3(cmd){|i, o, e|
+      [o.read, e.read]
+    }
+    return err unless out =~ /installed #{name}-(.*)/
 
     # make data dir
-    raise "installation failed" unless result =~ /installed #{name}-(.*)/
     version = $1
     data_dir = File.join(Conf.data_dir, "#{name}-#{version}")
     unless File.directory?(data_dir)
@@ -61,7 +68,7 @@ module GemManager
       Ramaze::Log.info "made data dir for the gem: #{data_dir}"
     end
 
-    [result, name, version]
+    [out, name, version]
   end
 
   def self.uninstall(name, version)
