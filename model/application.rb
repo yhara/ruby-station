@@ -11,6 +11,7 @@ class Application
     return if self.pid
 
     cmd = [
+      gem_env(),
       Conf.ruby_command,
       script_path,
       "--port", self.port.to_s,
@@ -48,6 +49,10 @@ class Application
 
   def data_dir
     File.join(Conf.data_dir, full_name)
+  end
+
+  def gem_env
+    "GEM_HOME='#{Conf.gem_dir}'"
   end
 end
 DataMapper.auto_upgrade!
