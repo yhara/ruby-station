@@ -18,6 +18,8 @@ class Application
       "--data-dir", data_dir,
     ].join(" ")
 
+    Ramaze::Log.info "starting app: #{cmd}"
+
     self.pid = Servant.watch(cmd){
       stopped
     }
