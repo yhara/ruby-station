@@ -1,3 +1,5 @@
+
+
 Given /^I have '(.*) (.*)'$/ do |name, version|
   GemManager.installed?(name, version)
 end
@@ -20,7 +22,8 @@ Then /^I should not have '(.*) (.*)'$/ do |name, version|
   GemManager.installed?(name, version).should be_false
 end
 
-Then /^data files of 'hello 0\.2\.0' is same as data files of 'hello 0\.1\.0'$/ do
-    pending
+Then /data files of '(.*) (.*)' is copied to '(.*) (.*)'/ do |n1, v1, n2, v2|
+  data_path(n1, v1)
+  data_path(n2, v2)
 end
 
