@@ -2,6 +2,6 @@
 :gem_command: "gem"
 :gem_dir: "./gem_home"
 :gem_bin_dir: "./gem_bin"
-:gem_install_option: "--no-rdoc --no-ri --verbose"
+:gem_install_option: "--no-rdoc --no-ri"
 :data_dir: "./data"
 :server_port: 2534
