@@ -1,6 +1,8 @@
 require 'open3'
 
 module GemManager
+  class InstallFailed < StandardError; end
+
   def self.installed?(gemname, version)
     gem_path = File.join(Conf.gem_dir, "gems", "#{gemname}-#{version}")
     exists = File.exist?(gem_path)
@@ -28,7 +30,7 @@ module GemManager
       out, err = Open3.popen3(cmd){|i, o, e|
         [o.read, e.read]
       }
-      return err unless out =~ /installed #{name}-(.*)/
+      raise InstallFailed.new(err) unless out =~ /installed #{name}-(.*)/
 
       # make data dir
       spec = YAML.load(`gem spec #{path}`)
@@ -58,7 +60,7 @@ module GemManager
     out, err = Open3.popen3(cmd){|i, o, e|
       [o.read, e.read]
     }
-    return err unless out =~ /installed #{name}-(.*)/
+    raise InstallFailed.new(err) unless out =~ /installed #{name}-(.*)/
 
     # make data dir
     version = $1

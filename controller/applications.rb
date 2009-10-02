@@ -29,28 +29,33 @@ class Applications < Controller
   end
 
   def _install
-    case session[:source_type]
-    when "name"
-      gemname = session[:gemname]
-      result, name, version = GemManager.install_gem(gemname)
-    when "file"
-      path = session[:tempfile].path
-      result, name, version = GemManager.install_file(path)
-    else
-      raise "unknown install source type: #{session[:source_type]}"
-    end
+    result = ""
+    begin
+      case session[:source_type]
+      when "name"
+        gemname = session[:gemname]
+        result, name, version = GemManager.install_gem(gemname)
+      when "file"
+        path = session[:tempfile].path
+        result, name, version = GemManager.install_file(path)
+      else
+        raise "unknown install source type: #{session[:source_type]}"
+      end
 
-    if result and not Application.first(:name => name, :version => version)
-      Application.create({
-        :pid => nil,
-        :port => 30000 + rand(9999),
-        :name => name,
-        :version => version,
-      })
+      unless Application.first(:name => name, :version => version)
+        Application.create({
+          :pid => nil,
+          :port => 30000 + rand(9999),
+          :name => name,
+          :version => version,
+        })
+      end
+    rescue GemManager::InstallFailed => e
+      result = e.message
+    ensure
+      session.clear
+      h result
     end
-
-    session.clear
-    h result
   end
 
   def uninstall(id)
