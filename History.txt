@@ -1,0 +1,23 @@
+2009-10-02 version x x x
+
+  * new: option --version
+  * fix: catch gem errors
+
+2009-10-02 version 0.1.3
+
+	* new: added tests
+  * new: support ruby 1.8 on unixes
+
+2009-08-15 version 0.0.4
+
+  * new: added runtime library for applications
+
+2009-08-13 version 0.0.3
+
+  * fix: save ruby-station.db in @home
+
+2009-07-19 version 0.0.2
+
+  * initial version
+
+
