@@ -5,3 +5,4 @@
 :gem_install_option: "--no-rdoc --no-ri --verbose"
 :data_dir: "../../tmp/data"
 :server_port: 25341
+:debug: true
