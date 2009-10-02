@@ -19,6 +19,14 @@ class Servant
   def self.watch(cmd, args=[], &block)
     begin
       pid = Process.spawn(cmd, *args)
+    rescue NoMethodError
+      begin
+        pid = Process.fork{
+          Process.exec(cmd, *args)
+        }
+      rescue NotImplementedError
+        raise "Ruby 1.9 is needed on windows!"
+      end
     rescue SystemCallError
       return nil
     end
