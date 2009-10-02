@@ -7,10 +7,10 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
   s.date = %q{2009-10-02}
-  s.default_executable = %q{bin/ruby-station}
+  s.default_executable = %q{ruby-station}
   s.description = %q{Create, Distribute, and Install Ruby applications easily}
   s.email = %q{yutaka.hara/at/gmail.com}
-  s.executables = ["bin/ruby-station"]
+  s.executables = ["ruby-station"]
   s.extra_rdoc_files = [
     "ChangeLog"
   ]
