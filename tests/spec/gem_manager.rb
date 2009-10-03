@@ -1,4 +1,5 @@
-require "#{File.dirname(__FILE__)}/../test_helper.rb"
+require 'ramaze'
+require __DIR__("../test_helper.rb")
 require TESTS_DIR/"../util/gem_manager.rb"
 
 # helpers
