@@ -18,6 +18,9 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.add_dependency('do_sqlite3', '= 0.10.0')
   gemspec.add_development_dependency('rspec', '= 1.2.8')
   gemspec.add_development_dependency('cucumber', '= 0.3.101')
+  gemspec.add_development_dependency('rack-test', '= 0.5.0')
+  gemspec.add_development_dependency('webrat', '= 0.5.3')
+  gemspec.add_development_dependency('culerity', '= 0.2.3')
   gemspec.executables = ["ruby-station"]
 end
 
