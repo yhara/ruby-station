@@ -12,10 +12,16 @@ module GemManager
   end
 
   def self.install_file(path)
+    symlinked = false
     begin
       # make symlink
-      newpath = "/tmp/#{File.basename(path, ".gem")}.gem"
-      File.symlink(path, newpath)
+      if path !~ /.gem\z/
+        newpath = "/tmp/#{File.basename(path, ".gem")}.gem"
+        File.symlink(path, newpath)
+        symlinked = true
+      else
+        newpath = path
+      end
 
       # install
       cmd = [
@@ -31,7 +37,7 @@ module GemManager
 
       [out, spec.name, spec.version.to_s]
     ensure
-      File.unlink(newpath)
+      File.unlink(newpath) if symlinked
     end
   end
 
