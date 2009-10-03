@@ -24,21 +24,10 @@ module GemManager
         "-n", Conf.gem_bin_dir,
         Conf.gem_install_option
       ].join(" ")
-      Ramaze::Log.info cmd
 
-      # execute
-      out, err = Open3.popen3(cmd){|i, o, e|
-        [o.read, e.read]
-      }
-      raise InstallFailed.new(err) unless out =~ /installed #{name}-(.*)/
-
-      # make data dir
+      out, _ = gem_install(cmd)
       spec = YAML.load(`gem spec #{path}`)
-      data_dir = File.join(Conf.data_dir, "#{spec.name}-#{spec.version}")
-      unless File.directory?(data_dir)
-        Dir.mkdir(data_dir)
-        Ramaze::Log.info "made data dir for the gem: #{data_dir}"
-      end
+      make_data_dir(File.join(Conf.data_dir, "#{spec.name}-#{spec.version}"))
 
       [out, spec.name, spec.version.to_s]
     ensure
@@ -47,30 +36,39 @@ module GemManager
   end
 
   def self.install_gem(name)
-    # install
     cmd = [
       Conf.gem_command, "install", name,
       "-i", Conf.gem_dir,
       "-n", Conf.gem_bin_dir,
       Conf.gem_install_option
     ].join(" ")
-    Ramaze::Log.info cmd
     
-    # execute
+    out, version = gem_install(cmd, name)
+    make_data_dir(File.join(Conf.data_dir, "#{name}-#{version}"))
+
+    [out, name, version]
+  end
+
+  def self.gem_install(cmd, name=nil)
+    Ramaze::Log.info cmd
     out, err = Open3.popen3(cmd){|i, o, e|
       [o.read, e.read]
     }
-    raise InstallFailed.new(err) unless out =~ /installed #{name}-(.*)/
 
-    # make data dir
-    version = $1
-    data_dir = File.join(Conf.data_dir, "#{name}-#{version}")
+    name_pattern = name ? "#{name}-" : ""
+    if out !~ /Successfully installed #{name_pattern}(.*)/
+      Ramaze::Log.error "gem install failed: #{err}"
+      raise InstallFailed.new(err)
+    end
+
+    return out, $1
+  end
+
+  def self.make_data_dir(data_dir)
     unless File.directory?(data_dir)
       Dir.mkdir(data_dir)
       Ramaze::Log.info "made data dir for the gem: #{data_dir}"
     end
-
-    [out, name, version]
   end
 
   def self.uninstall(name, version)
