@@ -87,7 +87,7 @@ Then /I should see '(.*)'/ do |text|
   begin
     div.html
   rescue
-    #puts $browser.html
+    puts $browser.html
     raise("div with '#{text}' not found")
   end
 end
