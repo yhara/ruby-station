@@ -21,6 +21,10 @@ def clear_tmp(tmp_dir)
   end
 end
 
+def hello_gem_path(version)
+  TESTS_DIR/"data/hello/pkg/hello-ruby-station-#{version}.gem"
+end
+
 clear_tmp(TESTS_DIR/"tmp/")
 require TESTS_DIR/"../config.rb"
 Conf.init TESTS_DIR/"data/conf_dir"

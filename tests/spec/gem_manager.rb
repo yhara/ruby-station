@@ -4,8 +4,7 @@ require TESTS_DIR/"../util/gem_manager.rb"
 
 describe GemManager do
   it "should install a gem via file" do
-    path = TESTS_DIR/"data/hello/pkg/hello-ruby-station-0.3.2.gem"
-    result, name, version = GemManager.install_file(path)
+    result, name, version = GemManager.install_file(hello_gem_path("0.3.2"))
 
     result.should be_instance_of(String)
     name.should == "hello-ruby-station"
