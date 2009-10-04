@@ -10,14 +10,11 @@ module RubyStation
 end
 
 class Conf
-  %w(ruby_command gem_command gem_dir gem_bin_dir gem_install_option data_dir server_port debug).each do |m|
+  %w(ruby_command gem_command gem_dir gem_bin_dir data_dir
+     db_path gem_install_option server_port debug).each do |m|
     class_eval <<-EOD
       def self.#{m}; @yaml[:#{m}]; end
     EOD
-  end
-
-  def self.db_path
-    File.join(@home, "ruby-station.db")
   end
 
   def self.parse_opt
@@ -64,6 +61,7 @@ class Conf
     @yaml[:gem_dir] = File.expand_path(@yaml[:gem_dir], @home)
     @yaml[:gem_bin_dir] = File.expand_path(@yaml[:gem_bin_dir], @home)
     @yaml[:data_dir] = File.expand_path(@yaml[:data_dir], @home)
+    @yaml[:db_path] = File.expand_path(@yaml[:db_path], @home)
     FileUtils.makedirs(@yaml[:gem_dir])
     FileUtils.makedirs(@yaml[:gem_bin_dir])
     FileUtils.makedirs(@yaml[:data_dir])
