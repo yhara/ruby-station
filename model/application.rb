@@ -7,6 +7,38 @@ class Application
   property :name, String
   property :version, String
 
+  # Install the speficied gem and create an Application
+  def self.install(by, value)
+    case by
+    when :name
+      result, name, version = GemManager.install_gem(value)
+    when :file
+      result, name, version = GemManager.install_file(value)
+    else
+      raise "invalid parameter: by => #{by}" 
+    end
+
+    unless Application.first(:name => name, :version => version)
+      Application.create({
+        :pid => nil,
+        :port => 30000 + rand(9999),
+        :name => name,
+        :version => version,
+      })
+    end
+
+    return result
+  end
+
+  # Uninstall the gem and destroy myself
+  def uninstall
+    result = GemManager.uninstall(self.name, self.version)
+    self.destroy
+
+    return result
+  end
+
+  # Start the app in background
   def start
     return if self.pid
 
@@ -26,6 +58,7 @@ class Application
     self.save
   end
 
+  # Kill the app if running
   def stop
     if self.pid
       Servant.kill(self.pid)
@@ -33,6 +66,7 @@ class Application
     end
   end
 
+  # Returns a string contains name and version
   def full_name
     "#{self.name}-#{self.version}"
   end

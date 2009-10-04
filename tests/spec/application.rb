@@ -1,15 +1,10 @@
 require 'ramaze'
 require __DIR__("../test_helper.rb")
 require TESTS_DIR/"../model/init.rb"
-
-def uninstall_hello(version)
-  if GemManager.installed?("hello-ruby-station", version)
-    GemManager.uninstall("hello-ruby-station", version)
-  end
-end
+require TESTS_DIR/"../util/servant.rb"
 
 def install_hello(version)
-  GemManager.install(hello_gem_path(version))
+  Application.install(:file, hello_gem_path(version))
   hello_app(version)
 end
 
@@ -23,8 +18,19 @@ describe Application do
     app = install_hello("0.3.2")
 
     app.should_not be_nil
-    app.port.should instance_of(Integer)
+    app.port.should be_kind_of(Integer)
     app.pid.should be_nil
+
+    Application.all(:name => "hello-ruby-station", 
+                    :version => "0.3.2").size.should == 1
+  end
+
+  it "should be removed by GemManager" do
+    install_hello("0.3.2") unless hello_app("0.3.2") 
+    hello_app("0.3.2").uninstall
+
+    hello_app("0.3.2").should be_nil
+    GemManager.installed?("hello-ruby-station", "0.3.2").should be_false
   end
 
   it "should start an app" do

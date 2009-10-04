@@ -33,22 +33,11 @@ class Applications < Controller
     begin
       case session[:source_type]
       when "name"
-        gemname = session[:gemname]
-        result, name, version = GemManager.install_gem(gemname)
+        result = Application.install(:name, session[:gemname])
       when "file"
-        path = session[:tempfile].path
-        result, name, version = GemManager.install_file(path)
+        result = Application.install(:file, session[:tempfile].path)
       else
         raise "unknown install source type: #{session[:source_type]}"
-      end
-
-      unless Application.first(:name => name, :version => version)
-        Application.create({
-          :pid => nil,
-          :port => 30000 + rand(9999),
-          :name => name,
-          :version => version,
-        })
       end
     rescue GemManager::InstallFailed => e
       result = e.message
@@ -69,12 +58,11 @@ class Applications < Controller
 
   def _uninstall(id)
     if app = Application.get(id)
-      result = GemManager.uninstall(app.name, app.version)
-      app.destroy
-      result
+      result = app.uninstall
     else
-      ""
+      result = ""
     end
+    result
   end
 
   def start(id)
