@@ -5,7 +5,17 @@ Cucumber::Rake::Task.new do |t|
   t.cucumber_opts = %w{--format pretty}
 end
 
+desc "run cucumber with cucumber-1.9"
+task "cucumber-1.9" do
+  sh "cucumber-1.9 features/*.feature"
+end
+
 desc "run rspec"
 task "spec" do
   sh "spec spec/*.rb"
+end
+
+desc "run rspec with spec-1.9"
+task "spec-1.9" do
+  sh "spec-1.9 spec/*.rb"
 end
