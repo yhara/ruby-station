@@ -1,3 +1,4 @@
+require 'timeout' # for culerity's bug on 1.9 
 require 'tempfile'
 require 'culerity'
 require __DIR__('../../test_helper.rb')
