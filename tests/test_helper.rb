@@ -1,6 +1,5 @@
 require 'fileutils'
 require 'ramaze'
-Ramaze.options.started = true
 
 TESTS_DIR = __DIR__
 def TESTS_DIR./(*paths)
@@ -26,6 +25,3 @@ def hello_gem_path(version)
 end
 
 clear_tmp(TESTS_DIR/"tmp/")
-require TESTS_DIR/"../config.rb"
-Conf.init TESTS_DIR/"data/conf_dir"
-

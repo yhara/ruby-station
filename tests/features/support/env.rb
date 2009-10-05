@@ -6,7 +6,7 @@ gem 'rack-test', '>= 0.5.0'
 gem 'webrat', '>= 0.5.3'
 
 require 'ramaze'
-Ramaze.options.started = true
+#Ramaze.options.started = true
 require __DIR__("../../test_helper.rb")
 load TESTS_DIR/"../bin/ruby-station"
 
