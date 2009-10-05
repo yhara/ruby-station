@@ -8,12 +8,6 @@ $LOAD_PATH.unshift __DIR__("../")
 
 require 'util/gem_manager.rb'
 require 'config.rb'
-if defined?(TESTS_DIR)
-  Conf.set_home(TESTS_DIR/"data/conf_dir/")
-else
-  Conf.parse_opt
-end
-Conf.init
 
 require 'util/servant.rb'
 require 'controller/init'

@@ -89,3 +89,10 @@ class Conf
 
   end
 end
+
+if defined?(TESTS_DIR)
+  Conf.set_home(TESTS_DIR/"data/conf_dir/")
+else
+  Conf.parse_opt
+end
+Conf.init
