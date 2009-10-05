@@ -2,9 +2,14 @@ def find_app(name, version)
   Application.first(:name => name, :version => version)
 end
 
+def install_hello(name, version)
+  raise "wrong gem name" unless name == "hello-ruby-station"
+  Application.install(:file, hello_gem_path(version))
+end
+
 Given /^I have '(.*) (.*)'$/ do |name, version|
   unless find_app(name, version)
-    Application.install(:file, hello_gem_path(version))
+    install_hello(name, version)
   end
 end
 
@@ -15,8 +20,7 @@ Given /^I do not have '(.*) (.*)'$/ do |name, version|
 end
 
 When /^I install '(.*) (.*)'$/ do |name, version|
-  raise "wrong gem name" unless name == "hello-ruby-station"
-  Application.install(:file, hello_gem_path(version))
+  install_hello(name, version)
 end
 
 Then /^I should (?:still )?have '(.*) (.*)'$/ do |name, version|
