@@ -5,5 +5,5 @@
 :db_path: "../../tmp/ruby-station.db"
 :data_dir: "../../tmp/data"
 :gem_install_option: "--no-rdoc --no-ri --verbose"
-:server_port: 25341
+:server_port: 7001
 :debug: true
