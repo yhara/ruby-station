@@ -7,7 +7,8 @@ end
 
 desc "run cucumber with cucumber-1.9"
 task "cucumber-1.9" do
-  sh "cucumber-1.9 features/*.feature"
+  cd "features/"
+  sh "cucumber-1.9 *.feature"
 end
 
 desc "run rspec"
