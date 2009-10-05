@@ -2,7 +2,6 @@ require 'timeout' # for culerity's bug on 1.9
 require 'tempfile'
 gem 'culerity', '>= 0.2.3'
 require 'culerity'
-require __DIR__('../../test_helper.rb')
 
 Before do
   # TODO: start ramaze app in 7001, in test environment
