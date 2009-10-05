@@ -1,25 +1,33 @@
-
+def find_app(name, version)
+  Application.first(:name => name, :version => version)
+end
 
 Given /^I have '(.*) (.*)'$/ do |name, version|
-  GemManager.installed?(name, version)
+  unless find_app(name, version)
+    Application.install(:file, hello_gem_path(version))
+  end
 end
 
 Given /^I do not have '(.*) (.*)'$/ do |name, version|
-  if GemManager.installed?(name, version)
-    GemManager.uninstall(name, version)
+  if app = find_app(name, version)
+    app.uninstall
   end
 end
 
 When /^I install '(.*) (.*)'$/ do |name, version|
-  pending
+  raise "wrong gem name" unless name == "hello-ruby-station"
+  Application.install(:file, hello_gem_path(version))
 end
 
 Then /^I should (?:still )?have '(.*) (.*)'$/ do |name, version|
-  GemManager.installed?(name, version).should be_true
+  sleep 10
+  app = find_app(name, version)
+  Ramaze::Log.error Application.all if app.nil? 
+  app.should_not be_nil
 end
 
 Then /^I should not have '(.*) (.*)'$/ do |name, version|
-  GemManager.installed?(name, version).should be_false
+  find_app(name, version).should be_nil
 end
 
 Then /data files of '(.*) (.*)' is copied to '(.*) (.*)'/ do |n1, v1, n2, v2|
