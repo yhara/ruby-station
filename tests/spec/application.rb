@@ -1,5 +1,6 @@
 require 'ramaze'
 require __DIR__("../test_helper.rb")
+require TESTS_DIR/"../config.rb"
 require TESTS_DIR/"../model/init.rb"
 require TESTS_DIR/"../util/servant.rb"
 
