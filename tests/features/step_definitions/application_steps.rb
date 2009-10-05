@@ -24,7 +24,6 @@ When /^I install '(.*) (.*)'$/ do |name, version|
 end
 
 Then /^I should (?:still )?have '(.*) (.*)'$/ do |name, version|
-  sleep 10
   app = find_app(name, version)
   Ramaze::Log.error Application.all if app.nil? 
   app.should_not be_nil
