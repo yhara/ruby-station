@@ -1,6 +1,11 @@
 require 'ramaze'
 require __DIR__("../test_helper.rb")
+require TESTS_DIR/"../config.rb"
 require TESTS_DIR/"../util/gem_manager.rb"
+
+def data_dir_of(name, version)
+  File.expand_path("#{name}-#{version}", TESTS_DIR/"tmp/data/")
+end
 
 describe GemManager do
   it "should install a gem via file" do
@@ -11,6 +16,7 @@ describe GemManager do
     version.should == "0.3.2"
 
     GemManager.installed?("hello-ruby-station", "0.3.2").should be_true
+    File.exist?(data_dir_of("hello-ruby-station", "0.3.2")).should be_true
   end
 
   it "should install a gem via network" do
@@ -21,11 +27,13 @@ describe GemManager do
     version.should == "0.3.0"
 
     GemManager.installed?("hello-ruby-station", "0.3.0").should be_true
+    File.exist?(data_dir_of("hello-ruby-station", "0.3.2")).should be_true
   end
   
   it "should uninstall a gem" do
     GemManager.uninstall("hello-ruby-station", "0.3.2")
 
     GemManager.installed?("hello-ruby-station", "0.3.2").should be_false
+    File.exist?(data_dir_of("hello-ruby-station", "0.3.2")).should be_false
   end
 end

@@ -104,6 +104,14 @@ module GemManager
     ].join(" ")
     Ramaze::Log.info cmd
 
+    GemManager.remove_data_dir(name, version)
+
     `#{cmd}`
+  end
+
+  def self.remove_data_dir(name, version)
+    data_dir = File.join(Conf.data_dir, "#{name}-#{version}")
+    Ramaze::Log.info "removing application data in #{data_dir}"
+    FileUtils.rm_r(data_dir)
   end
 end
