@@ -4,10 +4,9 @@ Feature: Uninstall
   I want to uninstall an unused application
 
   Scenario: Uninstall a gem
-#    Given I visit the index page
-#    When I press the uninstall link
-#    Given I visit the calculator page
-#    And I fill in '50' for 'first'
-#    And I fill in '70' for 'second'
-#    When I press 'Add'
-#    Then I should see 'Answer: 120'
+    Given I have 'hello-ruby-station 0.3.1' and its data
+    And I visit the index page
+    When I press the uninstall button of 'hello-ruby-station 0.3.1'
+    And I wait while the spinner is shown
+    Then I should not have 'hello-ruby-station 0.3.1'
+    And data files of 'hello-ruby-station 0.3.1' should not exist
