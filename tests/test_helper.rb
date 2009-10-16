@@ -8,13 +8,9 @@ end
 
 def clear_tmp(tmp_dir)
   if File.exist?(tmp_dir)
-    puts "removing all files under #{tmp_dir}..."
-    puts "are you sure? [just push enter if so]"
-    if STDIN.gets.chomp.empty?
-      FileUtils.rm_r(tmp_dir)
-    else
-      raise "user chose not to clear the temporary directory"
-    end
+    puts "removing all files under #{tmp_dir}... [Ctrl-C to stop it]"
+    sleep 2
+    FileUtils.rm_r(tmp_dir)
   else
     Dir.mkdir(tmp_dir)
   end
