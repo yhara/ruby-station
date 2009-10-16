@@ -28,6 +28,11 @@ at_exit do
   #Process.kill(6, $rails_server.pid.to_i) if $rails_server
 end
 
+When /I press the uninstall button of '(.*) (.*)'/ do |name, version|
+  $browser.cell(:id, "uninstall-#{name}-#{version}").link(:text, //).click
+  assert_successful_response
+end
+
 When /I press '(.*)'/ do |value|
   $browser.button(:value, value).click
   assert_successful_response
