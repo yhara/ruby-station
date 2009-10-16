@@ -55,6 +55,10 @@ Then /^data files of '(.*) (.*)' should exist$/ do |name, version|
   Dir.entries(data_dir_of(name, version)).should_not be_empty
 end
 
+Then /^data files of '(.*) (.*)' should not exist$/ do |name, version|
+  File.exist?(data_dir_of(name, version)).should be_false
+end
+
 Then /^data files of '(.*) (.*)' is same as '(.*) (.*)'/ do |n1, v1, n2, v2|
   files1 = files_of(data_dir_of(n1, v1)).sort
   files2 = files_of(data_dir_of(n2, v2)).sort
