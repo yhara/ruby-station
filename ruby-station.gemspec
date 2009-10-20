@@ -5,21 +5,18 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ruby-station}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Yutaka HARA"]
-  s.date = %q{2009-10-03}
+  s.date = %q{2009-10-20}
   s.default_executable = %q{ruby-station}
   s.description = %q{Create, Distribute, and Install Ruby applications easily}
   s.email = %q{yutaka.hara/at/gmail.com}
   s.executables = ["ruby-station"]
-  s.extra_rdoc_files = [
-    "ChangeLog"
-  ]
   s.files = [
     ".gitignore",
-     "ChangeLog",
+     "History.txt",
      "Rakefile",
      "VERSION",
      "bin/ruby-station",
@@ -28,6 +25,7 @@ Gem::Specification.new do |s|
      "controller/init.rb",
      "controller/main.rb",
      "layout/default.xhtml",
+     "lib/.gitignore",
      "model/application.rb",
      "model/init.rb",
      "public/css/ramaze_error.css",
@@ -40,22 +38,30 @@ Gem::Specification.new do |s|
      "runtime/Rakefile",
      "runtime/VERSION",
      "runtime/lib/ruby-station.rb",
-     "runtime/lib/ruby-station/helper.rb",
-     "runtime/lib/ruby-station/helper/rails.rb",
-     "runtime/ruby-station-runtime-0.0.4.gem",
+     "runtime/ruby-station-runtime-0.0.5.gem",
+     "runtime/ruby-station-runtime.gemspec",
      "sample.config.yaml",
      "tests/README",
      "tests/Rakefile",
+     "tests/console.rb",
      "tests/data/conf_dir/config.yaml",
+     "tests/data/hello/hello-ruby-station.gemspec",
+     "tests/data/hello/main.rb",
+     "tests/data/hello/pkg/hello-ruby-station-0.3.1.gem",
+     "tests/data/hello/pkg/hello-ruby-station-0.3.2.gem",
+     "tests/development/config.yaml",
      "tests/features/install_file.feature",
      "tests/features/install_name.feature",
      "tests/features/list.feature",
+     "tests/features/reinstall.feature",
      "tests/features/step_definitions/application_steps.rb",
-     "tests/features/step_definitions/curelity_steps.rb",
+     "tests/features/step_definitions/culerity_steps.rb",
      "tests/features/support/env.rb",
      "tests/features/uninstall.feature",
      "tests/features/upgrade.feature",
+     "tests/spec/application.rb",
      "tests/spec/gem_manager.rb",
+     "tests/spec/servant.rb",
      "tests/test_helper.rb",
      "util/gem_manager.rb",
      "util/servant.rb",
@@ -77,23 +83,32 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ramaze>, ["= 2009.07"])
+      s.add_runtime_dependency(%q<ramaze>, [">= 2009.07"])
       s.add_runtime_dependency(%q<dm-core>, ["= 0.10.1"])
       s.add_runtime_dependency(%q<do_sqlite3>, ["= 0.10.0"])
-      s.add_development_dependency(%q<rspec>, ["= 1.2.8"])
-      s.add_development_dependency(%q<cucumber>, ["= 0.3.101"])
+      s.add_development_dependency(%q<rspec>, ["= 1.2.9"])
+      s.add_development_dependency(%q<cucumber>, ["= 0.4.2"])
+      s.add_development_dependency(%q<rack-test>, ["= 0.5.0"])
+      s.add_development_dependency(%q<webrat>, ["= 0.5.3"])
+      s.add_development_dependency(%q<culerity>, ["= 0.2.3"])
     else
-      s.add_dependency(%q<ramaze>, ["= 2009.07"])
+      s.add_dependency(%q<ramaze>, [">= 2009.07"])
       s.add_dependency(%q<dm-core>, ["= 0.10.1"])
       s.add_dependency(%q<do_sqlite3>, ["= 0.10.0"])
-      s.add_dependency(%q<rspec>, ["= 1.2.8"])
-      s.add_dependency(%q<cucumber>, ["= 0.3.101"])
+      s.add_dependency(%q<rspec>, ["= 1.2.9"])
+      s.add_dependency(%q<cucumber>, ["= 0.4.2"])
+      s.add_dependency(%q<rack-test>, ["= 0.5.0"])
+      s.add_dependency(%q<webrat>, ["= 0.5.3"])
+      s.add_dependency(%q<culerity>, ["= 0.2.3"])
     end
   else
-    s.add_dependency(%q<ramaze>, ["= 2009.07"])
+    s.add_dependency(%q<ramaze>, [">= 2009.07"])
     s.add_dependency(%q<dm-core>, ["= 0.10.1"])
     s.add_dependency(%q<do_sqlite3>, ["= 0.10.0"])
-    s.add_dependency(%q<rspec>, ["= 1.2.8"])
-    s.add_dependency(%q<cucumber>, ["= 0.3.101"])
+    s.add_dependency(%q<rspec>, ["= 1.2.9"])
+    s.add_dependency(%q<cucumber>, ["= 0.4.2"])
+    s.add_dependency(%q<rack-test>, ["= 0.5.0"])
+    s.add_dependency(%q<webrat>, ["= 0.5.3"])
+    s.add_dependency(%q<culerity>, ["= 0.2.3"])
   end
 end
