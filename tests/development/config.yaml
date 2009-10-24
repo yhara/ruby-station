@@ -4,6 +4,6 @@
 :gem_bin_dir: "./gem_bin"
 :db_path: "./ruby-station.db"
 :data_dir: "./data"
-:gem_install_option: "--no-rdoc --no-ri --verbose"
+:gem_install_option: "--no-rdoc --no-ri"
 :server_port: 25341
 :debug: true
