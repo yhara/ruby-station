@@ -67,10 +67,15 @@ When /I choose '(.*)'/ do |field|
   $browser.radio(:id, find_label(field).for).set(true)
 end
 
-When /I visit the (.+) page/ do |name|
-  path = case name
-         when 'index' then '/'
-         else raise "unknown page name: #{name}"
+When /I visit the (.+) page(?: of '(.*) (.*)')?/ do |page, name, version|
+  path = case page
+         when 'index' 
+           '/'
+         when 'uninstall'
+           id = Application.first(:name => name, :version => version).id
+           "/applications/uninstall/#{id}"
+         else
+           raise "unknown page name: #{page}"
          end
   $browser.goto "#{@host}#{path}"
   assert_successful_response

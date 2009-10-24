@@ -1,17 +1,26 @@
 <div id="uninstall">
   <h2>Uninstall</h2>
 
-  <p>uninstalling #{@app.full_name} ..</p>
+  <div id="warning">
+    Really uninstall  #{@app.name} #{@app.version}?<br>
+    <br>
+    Application data of #{@app.name} #{@app.version} will be deleted.
+  </div>
 
   <pre id="result">
-    <img id="spinner" src='/spinner.gif'>
+    <input type='button' id='uninstall_btn' value='ok'></input>
+    <img id="spinner" src='/spinner.gif' style='display:none;'>
   </pre>
 
-  <a href='/'>back</a>
+  <a href='/'>back(cancel)</a>
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function(){
+$(function(){
+  $("#uninstall_btn").click(function(){
+    $("#uninstall_btn").hide();
+    $("#spinner").show();
     $("#result").load("#{r(:_uninstall, @app.id)}");
   });
+});
 </script>
