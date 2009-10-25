@@ -1,26 +1,28 @@
 body {
-
   margin-top: 1.0em;
-  background-color: #ff1f05;
   font-family: "Helvetica,Arial,FreeSans"; 
   color: black;
-
 }
 
 /* blocks */
 
 #container {
   margin: 0 auto;
+  padding: 0.1em 1em;
   width: 700px;
   background: white;
+  border: 1em solid #ff1f05;
 }
 .description {
   font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;
 }
 .screenshot {
   margin-left: 4em;
-  border: 1px solid gray;
   padding: 1px;
+  font-family: serif;
+}
+.screenshot img {
+  border: 1px solid gray;
 }
 .footer {
   text-align:center; padding-top:30px; font-style: italic; 
@@ -41,7 +43,7 @@ h2 {
   font-size: 1.5em; color: #f11; 
 }
 h3 {
-  text-align: center; color: #f11; 
+  color: #f11; 
 }
 
 /* others */

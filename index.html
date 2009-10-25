@@ -14,16 +14,47 @@
     <div id="container">
 
       <h1><a href="http://github.com/yhara/ruby-station">RubyStation</a></h1>
-      <div class="description">Manage browser-GUI Ruby apps</div>
+      <div class="description">Manages your browser-GUI Ruby apps</div>
 
       <h2>What's RubyStation?</h2>
+      <p>
+      Ruby has many awesome Web frameworks - <a
+        href='http://rubyonrails.com'>Rails</a>, <a
+        href='http://www.sinatrarb.com'>Sinatra</a>, <a
+        href='http://merbivore.com'>Merb</a>, <a
+        href='http://ramaze.net/'>Ramaze</a>,
+      etc. Maybe you have written some Web applications with them. 
+      Then, how about <em>desktop applications</em>?
+      </p>
+      <p>
+      You can create a desktop application with Rails by:
+      <ol>
+        <li>Write an app with Rails.</li>
+        <li>./script/server will start server on localhost,
+        i.e. it does work without the Internet.
+        </li>
+        <li>Pack the files into a gem file.</li>
+        <li>Users install the app with RubyGems, and run it on their
+        localhost. Why can't we call it a desktop application? :-)</li>
+      </ol>
+      </p>
+      <p>
+      RubyStation manages the port numbers for each application,
+      so all you need is click a link to start the application,
+      and new browser tab is opened.
+      </p>
 
-      <img class='screenshot' src='screenshot.png' />
-      
+      <div class='screenshot'>
+        <img src='screenshot.png' /><br>
+        [A screenshot of RubyStation. Two applications(gems) are
+        installed: "lifelog", which is running now, and
+        "moneyrail", not started yet.]
+      </div>
+
       <h2>Dependencies</h2>
       <p>
         <ul>
-          <li> ruby >= 1.8.x (It's 1.9 ready!) </li>
+          <li> ruby >= 1.8.x (it's 1.9 ready!) </li>
           <li>Mac or Unix (Windows is not supported yet)</li>
         </ul>
       </p>
@@ -35,13 +66,41 @@
           <pre>$ gem --version
 1.3.5</pre>
         </li>
+
         <li>Install <a href='http://gemcutter.org/'>gemcutter</a>
           <pre>$ sudo gem install gemcutter ; gem tumble</pre>
         </li>
+
         <li>Install RubyStaiton
           <pre>$ gem install ruby-station</pre>
         </li>
+
+        <li>Execute RubyStaiton
+          <pre>$ ruby-station</pre>
+          Then config file
+        </li>
+
+        <li>Install an application (eg. <a href='http://github.com/yhara/lifelog/'>LifeLog</a> - online notepad)
+        <p>
+        Enter "lifelog" to the input box and click [install].
+        Then 'gem install' is run, and new app is installed after some
+        minutes.
+        </p>
+        <div class='screenshot'>
+        <img src='install.png' />
+        </div>
+        <p>
+        List of applications are available at
+        <a href='http://wiki.github.com/yhara/ruby-station/applications'>wiki:Applications</a>.
+        </p>
+        </li>
       </ol>
+      </p>
+
+      <h3>Write an application for RubyStaiton</h3>
+      <p>
+      Creating an app is just as easy as making a gem;
+      See <a href='http://wiki.github.com/yhara/ruby-station/creatingapps'>wiki:CreatingApps</a> for more details.
       </p>
 
       <h2>License</h2>
