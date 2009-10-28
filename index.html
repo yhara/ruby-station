@@ -27,34 +27,33 @@
       Then, how about <em>desktop applications</em>?
       </p>
       <p>
-      You can create a desktop application with Rails by:
+      You can <b>create a desktop application with Rails</b> like:
       <ol>
         <li>Write an app with Rails.</li>
-        <li>./script/server will start server on localhost,
-        i.e. it does work without the Internet.
+        <li>./script/server will start server on localhost.
+        It does work without the Internet.
         </li>
-        <li>Pack the files into a gem file.</li>
+        <li>Pack the files into a gem.</li>
         <li>Users install the app with RubyGems, and run it on their
-        localhost. Why can't we call it a desktop application? :-)</li>
+        localhost.<br>
+        Why can't we call it a desktop application? :-)</li>
       </ol>
       </p>
       <p>
-      RubyStation manages the port numbers for each application,
-      so all you need is click a link to start the application,
-      and new browser tab is opened.
+      RubyStation manages the port numbers for your apps,
+      so all you need is click a link to start an application.
       </p>
 
       <div class='screenshot'>
         <img src='screenshot.png' /><br>
-        [A screenshot of RubyStation. Two applications(gems) are
-        installed: "lifelog", which is running now, and
-        "moneyrail", not started yet.]
+        [Two applications(gems) are installed: "lifelog", which is running
+        now, and "moneyrail", not started yet.]
       </div>
 
       <h2>Dependencies</h2>
       <p>
         <ul>
-          <li> ruby >= 1.8.x (it's 1.9 ready!) </li>
+          <li> ruby 1.8 or 1.9 </li>
           <li>Mac or Unix (Windows is not supported yet)</li>
         </ul>
       </p>
@@ -62,7 +61,7 @@
       <h2>Install</h2>
       <p>
       <ol>
-        <li>Be sure you have rubygems &gt;= 1.3.5 (gem --version)
+        <li>Be sure you have RubyGems &gt;= 1.3.5
           <pre>$ gem --version
 1.3.5</pre>
         </li>
@@ -75,9 +74,16 @@
           <pre>$ gem install ruby-station</pre>
         </li>
 
-        <li>Execute RubyStaiton
+        <li>Start RubyStaiton
           <pre>$ ruby-station</pre>
-          Then config file
+          <p>Then open <a href='http://localhost:2534'>localhost:2534</a>
+          with your browser.
+          </p>
+          <p>(Note: RubyStaiton expects ruby command is <code>"ruby"</code>
+          and gem command is <code>"gem"</code>. If you are using different
+          name, stop the server with Ctrl-C and edit
+          ~/.ruby-station/config.yaml.)
+          </p>
         </li>
 
         <li>Install an application (eg. <a href='http://github.com/yhara/lifelog/'>LifeLog</a> - online notepad)
