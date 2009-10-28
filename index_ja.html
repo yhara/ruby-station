@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>RubyStation</title>
+    <link href="screen.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <a href="http://github.com/yhara/ruby-station"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+    <div id="container">
+
+      <h1><a href="http://github.com/yhara/ruby-station">RubyStation</a></h1>
+      <div class="description">Manages your browser-GUI Ruby apps</div>
+
+      <h2>RubyStationとは</h2>
+      <p>
+      RubyにはたくさんのWebフレームワークがあります。<a
+        href='http://rubyonrails.com'>Rails</a>, <a
+        href='http://www.sinatrarb.com'>Sinatra</a>, <a
+        href='http://merbivore.com'>Merb</a>, <a
+        href='http://ramaze.net/'>Ramaze</a>,
+      などなど。これらを使って、Webアプリを作ったことがあるかも
+      知れません。では、<b>デスクトップアプリが作れる</b>ことは
+      ご存じでしたか？
+      </p>
+      <p>
+      Railsを使って<b>デスクトップアプリ</b>を作るには、
+      以下のようにします。
+      <ol>
+        <li>Railsで普通にアプリケーションを作ります。</li>
+        <li>ファイルをzipに固めます。</li>
+        <li>ユーザはそれをダウンロードし、展開して、./script/server
+        を実行します。</li>
+        <li>localhost:3000でアプリケーションが起動しました。
+      </ol>
+      ほら、どう見てもデスクトップアプリでしょう？:-)
+      </p>
+      <p>
+      RubyStationは、そんなアプリケーションを管理するためのソフトウェア
+      です。各アプリにポート番号を自動で割り当てるので、リンクを
+      クリックするだけでアプリを起動することができます。
+      </p>
+      <p>
+      「ブラウザをデスクトップアプリのGUIにする」というアイデア、
+      試してみませんか？
+      </p>
+
+      <div class='screenshot'>
+        <img src='screenshot.png' /><br>
+        [Two applications(gems) are installed: "lifelog", which is running
+        now, and "moneyrail", not started yet.]
+      </div>
+
+      <h2>インストール</h2>
+      必要なもの：
+      <ul>
+        <li> ruby 1.8 or 1.9 </li>
+        <li>Mac or Unix (Windowsはまだ非対応)</li>
+      </ul>
+      <p>
+      手順：
+      <ol>
+        <li>RubyGems 1.3.5以上がインストールされていることを確認します。
+          <pre>$ gem --version
+1.3.5</pre>
+        </li>
+
+        <li><a href='http://gemcutter.org/'>gemcutter</a>をインストールします。
+          <pre>$ sudo gem install gemcutter ; gem tumble</pre>
+        </li>
+
+        <li>RubyStaitonをインストールします。
+          <pre>$ gem install ruby-station</pre>
+        </li>
+
+        <li>RubyStaitonを起動します。
+          <pre>$ ruby-station</pre>
+          <p>サーバが立ち上がるので、ブラウザで<a href='http://localhost:2534'>localhost:2534</a>
+          を開いてください。
+          </p>
+          <p>(注: RubyStaitonは、Rubyの起動コマンドが<code>"ruby"</code>、
+          RubyGemsの起動コマンドが<code>"gem"</code>であると仮定しています。
+          そうでない場合は、一旦Ctrl-CでRubyStationを停止して、
+          ~/.ruby-station/config.yamlを編集してください。)
+          </p>
+        </li>
+
+        <li>何かアプリケーションをインストールしてみましょう
+        (例：<a href='http://github.com/yhara/lifelog/'>LifeLog</a>)。
+        <p>
+        インプットボックスに"lifelog"と入れて、[install]をクリックします。
+        すると、'gem install'が実行され、インストールが完了します
+        (最初は数分かかるのでしばらくお待ち下さい)。
+        </p>
+        <div class='screenshot'>
+        <img src='install.png' />
+        </div>
+        <p>
+        公開されているアプリケーションのリストは
+        <a href='http://wiki.github.com/yhara/ruby-station/applications'>wiki:Applications</a>
+        にあります。
+        </p>
+        </li>
+      </ol>
+      </p>
+
+      <h3>RubyStaitonのためのアプリを書く</h3>
+      <p>
+      main.rbというファイルが入ったgemを作るだけです。
+      詳細は<a href='http://wiki.github.com/yhara/ruby-station/creatingapps'>wiki:CreatingApps</a>
+      を見て下さい。
+      </p>
+
+      <h2>ライセンス</h2>
+      <p>Ruby's</p>
+
+      <h2>作者・連絡先</h2>
+      <p>Yutaka HARA (yutaka.hara/at/gmail.com)</p>
+
+      <h2>リポジトリ</h2>
+      ソースコードはGitHubで公開されています。<a href="http://github.com/yhara/ruby-station">yhara/ruby-station</a>
+      <p><a href="http://git-scm.com">Git</a>を使って取ってくることができます：
+      <pre>$ git clone git://github.com/yhara/ruby-station</pre>
+      </p>
+
+      <div class="footer">
+        <a href='index.html'>en</a> / ja
+      </div>
+
+    </div>
+
+
+  </body>
+</html>
