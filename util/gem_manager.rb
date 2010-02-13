@@ -33,7 +33,7 @@ module GemManager
       ].join(" ")
 
       out, _ = gem_install(cmd)
-      spec = YAML.load(`gem spec #{path}`)
+      spec = YAML.load(`gem spec #{newpath}`)
       name, version = spec.name, spec.version.to_s
       make_data_dir(name, version)
 
