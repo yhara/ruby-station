@@ -16,6 +16,7 @@ Jeweler::Tasks.new do |gemspec|
   gemspec.add_dependency('ramaze', '>= 2009.07')
   gemspec.add_dependency('dm-core', '= 0.10.1')
   gemspec.add_dependency('do_sqlite3', '= 0.10.0')
+  gemspec.add_dependency('json')
   gemspec.add_development_dependency('rspec', '= 1.2.9')
   gemspec.add_development_dependency('cucumber', '= 0.4.2')
   gemspec.add_development_dependency('rack-test', '= 0.5.0')
