@@ -54,8 +54,12 @@
         <a href="/">RubyStation</a>
       </h1>
       <div>
-        #@content
+        #{@content}
       </div>
+    </div>
+    <div id="footer">
+      RubyStation #{RubyStation::VERSION}<br>
+      Ruby #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}
     </div>
   </body>
 </html>
