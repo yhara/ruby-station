@@ -17,12 +17,14 @@ Features
 1. install cucumber:
     $ gem install cucumber
 
-2. install jruby (http://jruby.org/)
+2. install jruby (http://jruby.org/) and celerity
 
 JRuby must be executable by 'jruby'.
 
+    $ jgem install celerity
+
 3. install culerity:
-    $ gem install langalex-culerity --source http://gems.github.com
+    $ gem install culerity
 
 4. run test
     $ rake cucumber
