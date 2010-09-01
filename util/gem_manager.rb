@@ -33,7 +33,7 @@ module GemManager
       ].join(" ")
 
       out, _ = gem_install(cmd)
-      spec = YAML.load(`gem spec #{newpath}`)
+      spec = YAML.load(`#{Conf.gem_command} spec #{newpath}`)
       name, version = spec.name, spec.version.to_s
       make_data_dir(name, version)
 
@@ -98,6 +98,7 @@ module GemManager
   def self.uninstall(name, version)
     cmd = [
       Conf.gem_command, "uninstall", name,
+      "-x", #Uninstall applicable executables without confirmation
       "-v", version,
       "-i", Conf.gem_dir,
       "-n", Conf.gem_bin_dir
