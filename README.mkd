@@ -1,0 +1,50 @@
+RubyStation
+===========
+
+Make desktop apps with web technology.
+
+Website
+=======
+http://yhara.github.com/ruby-station/
+
+Tips
+====
+
+Autostart ruby-station on Mac OS X
+----------------------------------
+
+Use launchd.
+
+    $ man launchd
+
+~/Library/LaunchAgents/net.route477.ruby_station.plist:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+            <key>Label</key>
+            <string>net.route477.ruby_station</string>
+            <key>OnDemand</key>
+            <false/>
+            <key>Porgram</key>
+            <string>/opt/local/bin/ruby</string>
+            <key>ProgramArguments</key>
+            <array>
+                    <string>/Users/***your username***/.gem/ruby/1.8/bin/ruby-station</string>
+            </array>
+            <key>QueueDirectories</key>
+            <array/>
+            <key>RunAtLoad</key>
+            <true/>
+            <key>WatchPaths</key>
+            <array/>
+    </dict>
+    </plist>
+
+Restart (or '$ launchctl start net.route477.ruby_station') and ruby-station starts.
+
+Contact
+=======
+Yutaka HARA (yhara)
+http://github.com/yhara/ruby-station/
