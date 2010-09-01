@@ -1,5 +1,7 @@
-2009-10-02 version x x x
+2010-09-01 version 0.1.6
 
+  * fixed error with file_install
+  ...
   * new: option --version
   * fix: catch gem errors
 
